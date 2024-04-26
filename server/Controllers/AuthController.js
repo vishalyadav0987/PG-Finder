@@ -13,7 +13,7 @@ const register = async (req, res) => {
         }
         const profileImagePath = profileImage.path;
         const existingUser = await UserSchema.findOne({ email });
-        if (!existingUser) {
+        if (existingUser) {
             return res.status(StatusCodes.BAD_REQUEST).json({ msg: "User Already exist!" });
         }
 
@@ -34,11 +34,11 @@ const register = async (req, res) => {
             user: newUser
         });
     } catch (error) {
-
+        console.log(error)
     }
 }
 
 
-module.exports={
+module.exports = {
     register
 }
