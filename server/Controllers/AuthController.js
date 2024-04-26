@@ -38,7 +38,36 @@ const register = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    try {
+        /* Take the infomation from the form */
+        const { email, password } = req.body
+
+        /* Check if user exists */
+        console.log(email, password)
+        const user = await UserSchema.findOne({ email });
+        if (!user) {
+            return res.status(StatusCodes.CONFLICT).json({ msg: "User doesn't exist!" });
+        }
+
+        /* Compare the password with the hashed password */
+        const isMatch = await bcrypt.compare(password, user.password)
+        if (!isMatch) {
+            return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid Credentials!" })
+        }
+
+        /* Generate JWT token */
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECERET)
+        delete user.password // data decode karke password destructurre kar liya hai
+
+        res.status(StatusCodes.OK).json({ token, user })
+
+    } catch (err) {
+        console.log(err)
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: err.message })
+    }
+}
 
 module.exports = {
-    register
+    register, login
 }

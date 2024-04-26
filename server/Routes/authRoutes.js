@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { register } = require('../Controllers/AuthController');
+const { register, login } = require('../Controllers/AuthController');
 
 
 /** Configuration Multur for File Uploade**/
@@ -18,5 +18,7 @@ const upload = multer({ storage });
 
 /** User Register **/
 router.post('/register', upload.single("profileImage"), register);
+/* USER LOGIN*/
+router.post("/login", login)
 
 module.exports = router;

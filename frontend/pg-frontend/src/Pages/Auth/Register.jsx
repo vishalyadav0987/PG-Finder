@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 // import { FaUpload } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,Link } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
 import avatar from '../../assets/profile.png'
 // import { FaUser } from "react-icons/fa";
@@ -212,6 +212,9 @@ const Register = () => {
                         }
                         <button type='submit' disabled={!passwordMatch} className='btn'>REGISTER</button>
                     </form>
+                    <div className="bottom">
+                        Already have account ? <Link to={'/login'}>Login here</Link>
+                    </div>
                 </div>
             </section>
         </>

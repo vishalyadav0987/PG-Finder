@@ -13,7 +13,7 @@
     position: relative;
 }
 .register-container{
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.736);
     width: 30rem;
     padding: 4rem 3rem;
     border-radius: 10px;
@@ -54,7 +54,7 @@ form input{
 }
 .heading{
     position: absolute;
-    top: 35vh;
+    top: 37vh;
     left: 8vw;
     font-family: sans-serif;
     color: #ffffff;
@@ -82,4 +82,10 @@ form input{
 }
 .btn:active{
     transform: scale(0.9);
+}
+.bottom{
+    margin-top: 0.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
