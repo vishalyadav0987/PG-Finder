@@ -1,0 +1,10 @@
+@mixin mb {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+@mixin sm {
+    @media (max-width: 600px) {
+        @content;
+    }
+}
