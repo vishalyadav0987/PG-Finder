@@ -25,17 +25,23 @@ const Login = () => {
 
       /** get data after fetching **/
       const loggedIn = await response.json();
-      if (loggedIn) {
+      if (loggedIn.success) {
         dispatch(
           setLogin({
             user: loggedIn.user,
             token: loggedIn.token
           })
         )
-        navigate('/')
+        navigate('/');
+        toast.success("User logged in succesfully");
+        console.log(loggedIn.success)
+      }
+      else{
+        toast.error(loggedIn.msg);
       }
     } catch (error) {
-      console.log("Login Failed")
+      console.log("Login Failed");
+      toast.error("Something went wrong! please try agian later");
     }
   }
   return (

@@ -47,20 +47,20 @@ const login = async (req, res) => {
         console.log(email, password)
         const user = await UserSchema.findOne({ email });
         if (!user) {
-            return res.status(StatusCodes.CONFLICT).json({ msg: "User doesn't exist!" });
+            return res.status(StatusCodes.CONFLICT).json({ success: false, msg: "User doesn't exist!" });
         }
 
         /* Compare the password with the hashed password */
         const isMatch = await bcrypt.compare(password, user.password)
         if (!isMatch) {
-            return res.status(StatusCodes.BAD_REQUEST).json({ msg: "Invalid Credentials!" })
+            return res.status(StatusCodes.BAD_REQUEST).json({ success: false,msg: "Invalid Credentials!" })
         }
 
         /* Generate JWT token */
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECERET)
         delete user.password // data decode karke password destructurre kar liya hai
 
-        res.status(StatusCodes.OK).json({ token, user })
+        res.status(StatusCodes.OK).json({success: true, token, user })
 
     } catch (err) {
         console.log(err)

@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FaSearch, FaUser, FaBars } from 'react-icons/fa'; // Import icons from react-icons library
-import logo from '../assets/profile.png'; // Import your logo image
+import logo from '../assets/logo2.png'; // Import your logo image
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import { setLogout } from '../redux/state';
+import { FaHome } from "react-icons/fa";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -16,7 +17,7 @@ const Navbar = () => {
   return (
     <nav style={styles.navbar}>
       <div style={styles.logoContainer}>
-        <img src={logo} alt="Logo" style={styles.logo} />
+        <FaHome style={styles.logo} /> <span style={styles.logoText}>PG</span><span style={styles.logoText2}>Finder</span>
       </div>
       <div style={styles.searchContainer}>
         <input type="text" placeholder="Search..." style={styles.searchInput} />
@@ -87,11 +88,23 @@ const styles = {
   },
   logoContainer: {
     marginRight: 'auto',
+    display:"flex",
+    alignItems:"end",
+    gap:"5px"
   },
   logo: {
-    width: '50px',
-    height: '50px',
     cursor: 'pointer',
+    color: "white",
+    fontSize: "3.2rem"
+  },
+  logoText:{
+    fontSize: "2.4rem",
+    color:"#76ABAE",
+    fontWeight:"900"
+  },
+  logoText2:{
+    fontSize: "1.8rem",
+    color:"#fff"
   },
   searchContainer: {
     display: 'flex',
