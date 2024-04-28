@@ -33,7 +33,7 @@ const Navbar = () => {
         <FaBars style={styles.hamburgerIcon} onClick={handleHamburgerClick} />
         {
           user ?
-            (<img src={`http://localhost:3000/${user.profileImagePath.replace("public", "")}`} style={{ objectFit: "cover", width: "30px", borderRadius: "50%" }} alt="profile" />)
+            (<img src={`http://localhost:3000/${user.profileImagePath.replace("public", "")}`} style={{ objectFit: "cover", width: "40px", borderRadius: "50%" }} alt="profile" />)
             : <FaUser style={styles.profileIcon} />
         }
         {isDropdownOpen && (
@@ -84,12 +84,12 @@ const styles = {
     padding: '10px 20px',
     backgroundColor: '#333',
     borderRadius: '0',
-    boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1)',
+    boxShadow: "rgba(255, 255, 255) 0px 10px 20px, rgba(255, 255, 255) 0px 6px 6px",
   },
   logoContainer: {
     marginRight: 'auto',
     display:"flex",
-    alignItems:"end",
+    alignItems:"baseline",
     gap:"5px"
   },
   logo: {
@@ -112,6 +112,7 @@ const styles = {
     backgroundColor: '#555',
     borderRadius: '5px',
     padding: '5px',
+    marginRight:"110px"
   },
   searchInput: {
     border: 'none',
@@ -134,10 +135,10 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     border: '1px solid #c5c5c5',
-    padding: '0.4rem 0.8rem',
+    padding: '0.2rem 0.8rem',
     borderRadius: '30px',
     cursor: 'pointer',
-    fontSize: '1.2rem',
+    fontSize: '1.4rem',
   },
   hamburgerIcon: {
     color: '#fff',
@@ -164,10 +165,12 @@ const styles = {
     textDecoration: 'none',
     padding: '5px',
     margin: '5px 0',
+    fontSize:'1.2rem',
+    marginTop:'10px'
   },
   landlordText1: {
     position: 'absolute',
-    right: '8vw',
+    right: '8.5vw',
 
   },
   landlordText: {
