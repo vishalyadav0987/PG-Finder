@@ -72,10 +72,10 @@ const Login = () => {
             // required
             />
 
-            <button type='submit' className='btn'>REGISTER</button>
+            <button type='submit' className='btn'>Login</button>
           </form>
           <div className="bottom">
-            Don't have account ? <Link to={'/register'}>Register here</Link>
+            Don't have account ? <Link to={'/register'}> Register here</Link>
           </div>
         </div>
       </section>

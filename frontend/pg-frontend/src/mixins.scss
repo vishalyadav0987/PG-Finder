@@ -8,3 +8,14 @@
         @content;
     }
 }
+@mixin ml {
+    @media (max-width: 450px) {
+        @content;
+    }
+}
+@mixin md {
+    @media (max-width: 350px) {
+        @content;
+    }
+}
+
