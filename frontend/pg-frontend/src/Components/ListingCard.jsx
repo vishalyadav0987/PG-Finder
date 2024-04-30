@@ -10,7 +10,7 @@ const ListingCard = ({
     city,
     province,
     country,
-    category,
+    category, 
     type,
     price,
 }) => {
