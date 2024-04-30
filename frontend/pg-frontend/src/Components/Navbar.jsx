@@ -40,7 +40,7 @@ const Navbar = () => {
           <div style={styles.dropdownContent}>
             {user ? (
               <>
-                <Link to="/trip-list" style={styles.dropdownItem}>
+                <Link style={styles.dropdownItem} to={`/${user._id}/trips`}>
                   Trip List
                 </Link>
                 <Link to="/wish-list" style={styles.dropdownItem}>
@@ -176,8 +176,8 @@ const styles = {
   landlordText: {
     color: 'white', textDecoration: 'none',
   },
-  link:{
-    textDecoration:'none',
+  link: {
+    textDecoration: 'none',
   }
 };
 

@@ -13,6 +13,10 @@ const ListingCard = ({
     category, 
     type,
     price,
+    startDate,
+    endDate,
+    totalPrice,
+    booking
 }) => {
     const navigate = useNavigate();
     /** Slider for image **/
@@ -70,8 +74,23 @@ const ListingCard = ({
                     {city}, {province}, {country}
                 </h3>
                 <p>{category}</p>
-                <p>{type}</p>
-                <p>  <span>₹{price}</span> per Month</p>
+                {
+                    !booking?(
+                        <>
+                        <p>{type}</p>
+                        <p>
+                            <span>₹{price}</span> per month
+                        </p>
+                        </>
+                    ):(
+                        <>
+                        <p>{startDate} - {endDate}</p>
+                        <p>
+                            <span>₹{totalPrice}</span> total
+                        </p>
+                        </>
+                    )
+                }
             </div>
         </>
     )

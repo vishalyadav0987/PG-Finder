@@ -5,6 +5,7 @@ import Login from './Pages/Auth/Login'
 import HomePage from './Pages/Home/HomePage';
 import CreateListing from './Pages/Home/CreateListing';
 import ListingDetails from './Pages/Home/ListingDetails';
+import TripList from './Pages/Home/TripList';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/create-listing' element={<CreateListing />} />
           <Route path='/properties/:listingId' element={<ListingDetails />} />
+          <Route path='/:userId/trips' element={<TripList />} />
         </Routes>
       </BrowserRouter>
     </div>

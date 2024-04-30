@@ -1,4 +1,4 @@
-import React ,{ useEffect, useState }from "react";
+import React, { useEffect, useState } from "react";
 import "../../Styles/ListingDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { facilities } from "../../catDB";
@@ -9,6 +9,7 @@ import { DateRange } from "react-date-range";
 import Loader from "../../Components/Loader";
 import Navbar from "../../Components/Navbar";
 import { useSelector } from "react-redux";
+import toast, { Toaster } from "react-hot-toast"
 // import Footer from "../components/Footer"
 
 const ListingDetails = () => {
@@ -16,7 +17,7 @@ const ListingDetails = () => {
 
     const { listingId } = useParams();
     const [listing, setListing] = useState(null);
- 
+
     const getListingDetails = async () => {
         try {
             const response = await fetch(
@@ -26,7 +27,8 @@ const ListingDetails = () => {
                 }
             );
             if (!response.ok) {
-                throw new Error("Failed to fetch listing details");
+                // throw new Error("Failed to fetch listing details");
+                toast.error("Failed to fetch listing details")
             }
             const data = await response.json();
             console.log(data)
@@ -34,6 +36,7 @@ const ListingDetails = () => {
             // setLoading(false);
         } catch (err) {
             console.log("Fetch Listing Details Failed", err.message);
+            toast.error("Failed to fetch listing details")
         }
         finally {
             setLoading(false);
@@ -65,6 +68,39 @@ const ListingDetails = () => {
     const end = new Date(dateRange[0].endDate);
     const dayCount = Math.round(end - start) / (1000 * 60 * 60 * 24); // Calculate the difference in day unit
 
+    /*** BOOKING SUBMIT HANDLE ***/
+    const customerId = useSelector((state) => state?.user?._id);
+    const navigate = useNavigate();
+
+    const handleSubmit = async () => {
+        try {
+            const bookingForm = {
+                customerId,
+                listingId,
+                hostId: listing.creator._id,
+                startDate: dateRange[0].startDate.toDateString(),
+                endDate: dateRange[0].endDate.toDateString(),
+                totalPrice: listing.price * dayCount,
+            }
+            const response = await fetch('http://localhost:3000/api/v1/bookings/create', {
+                method: "POST",
+                "headers": {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bookingForm)
+            });
+            if (response.ok) {
+                toast.success("Booking succesfully!")
+                navigate(`/${customerId}/trips`);
+            }
+            else{
+                toast.error("Failed to fetch listing details")
+
+            }
+        } catch (error) {
+            toast.error("Failed to fetch listing details")
+        }
+    }
 
 
 
@@ -76,13 +112,14 @@ const ListingDetails = () => {
             <Navbar />
 
             <div className="listing-details">
+            <Toaster position='top-center' reverseOrder={false} />
                 <div className="title">
                     <h1>{listing.title}</h1>
                     <div></div>
                 </div>
 
                 <div className="photos">
-                    {listing.listingPhotoPaths?.map((item,index) => (
+                    {listing.listingPhotoPaths?.map((item, index) => (
                         <img key={index}
                             src={`http://localhost:3000/${item.replace("public", "")}`}
                             alt={`Listing photo ${index + 1}`}
@@ -145,19 +182,19 @@ const ListingDetails = () => {
                             <DateRange ranges={dateRange} onChange={handleSelect} />
                             {dayCount > 1 ? (
                                 <h2>
-                                    ${listing.price} x {dayCount} Months
+                                    ₹{listing.price} x {dayCount} Months
                                 </h2>
                             ) : (
                                 <h2>
-                                    ${listing.price} x {dayCount} Months
+                                    ₹{listing.price} x {dayCount} Months
                                 </h2>
                             )}
 
-                            <h2>Total price: ${listing.price * dayCount}</h2>
+                            <h2>Total price: ₹{listing.price * dayCount}</h2>
                             <p>Start Date: {dateRange[0].startDate.toDateString()}</p>
                             <p>End Date: {dateRange[0].endDate.toDateString()}</p>
 
-                            <button className="button" type="submit">
+                            <button className="button" type="submit" onClick={handleSubmit}>
                                 BOOKING
                             </button>
                         </div>

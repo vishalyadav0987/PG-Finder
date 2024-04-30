@@ -6,6 +6,7 @@ const cors = require('cors');
 const authRoutes = require('./Routes/authRoutes');
 const PageListingRoutes = require('./Routes/PageListingRoute');
 const BookingRoute = require('./Routes/BookingRoute');
+const UserRoute = require('./Routes/UserRoute');
 
 
 
@@ -20,8 +21,8 @@ app.get('/test', (req, res) => {
 
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/properties', PageListingRoutes);
-app.use('/api/v1/booking',BookingRoute);
-
+app.use('/api/v1/bookings',BookingRoute);
+app.use('/api/v1/users',UserRoute)
 
 const port = 3000 || process.env.PORT;
 
