@@ -18,4 +18,14 @@
         @content;
     }
 }
+@mixin lg {
+    @media (max-width: 900px) {
+        @content;
+    }
+}
+@mixin xl {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
 
