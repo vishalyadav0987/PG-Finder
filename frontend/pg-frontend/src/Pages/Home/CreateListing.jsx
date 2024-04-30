@@ -6,8 +6,14 @@ import { IoAddCircleOutline, IoRemoveCircleOutline } from 'react-icons/io5';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { IoIosImages } from "react-icons/io";
 import { BiTrash } from 'react-icons/bi';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import toast from "react-hot-toast";
 
 const CreateListing = () => {
+
+    const navigate = useNavigate();
+
     const [category, setCategory] = useState("");
     const [type, setType] = useState("");
     // const [amenities, setAmenities] = useState([]);
@@ -46,22 +52,22 @@ const CreateListing = () => {
         }
     };
 
-     /* DESCRIPTION */
-  const [formDescription, setFormDescription] = useState({
-    title: "",
-    description: "",
-    highlight: "",
-    highlightDesc: "",
-    price: 0,
-  });
-
-  const handleChangeDescription = (e) => {
-    const { name, value } = e.target;
-    setFormDescription({
-      ...formDescription,
-      [name]: value,
+    /* DESCRIPTION */
+    const [formDescription, setFormDescription] = useState({
+        title: "",
+        description: "",
+        highlight: "",
+        highlightDesc: "",
+        price: 0,
     });
-  };
+
+    const handleChangeDescription = (e) => {
+        const { name, value } = e.target;
+        setFormDescription({
+            ...formDescription,
+            [name]: value,
+        });
+    };
 
     /** UPLOAD,DRAG AND DROP AND DELETE PHOTOS **/
     const [photos, setPhotos] = useState([]);
@@ -84,13 +90,57 @@ const CreateListing = () => {
             prevPhotos.filter((_, index) => index !== indexToRemove)
         );
     }
+
+    const creatorId = useSelector((state) => state.user._id);
+    const handlePost = async (e) => {
+        e.preventDefault();
+        try {
+            const listingForm = new FormData();
+            listingForm.append("creator", creatorId);
+            listingForm.append("category", category);
+            listingForm.append("type", type);
+            listingForm.append("streetAddress", formLocation.streetAddress);
+            listingForm.append("aptSuite", formLocation.aptSuite);
+            listingForm.append("city", formLocation.city);
+            listingForm.append("province", formLocation.province);
+            listingForm.append("country", formLocation.country);
+            listingForm.append("guestCount", guestCount);
+            listingForm.append("bedroomCount", bedroomCount);
+            listingForm.append("bedCount", bedCount);
+            listingForm.append("bathroomCount", bathroomCount);
+            listingForm.append("amenities", amenities);
+            listingForm.append("title", formDescription.title);
+            listingForm.append("description", formDescription.description);
+            listingForm.append("highlight", formDescription.highlight);
+            listingForm.append("highlightDesc", formDescription.highlightDesc);
+            listingForm.append("price", formDescription.price);
+
+            /* Append each selected photos to the FormData object */
+            photos.forEach((photo) => {
+                listingForm.append("listingPhotos", photo);
+            });
+
+            // Request to the server
+            const response = await fetch('http://localhost:3000/api/v1/properties/create', {
+                method: "POST",
+                body: listingForm
+            });
+            if (response.ok) {
+                toast.success(response.msg);
+                navigate('/');
+            }
+        } catch (error) {
+            toast.error(response.error);
+            console.log(error);
+        }
+    }
     return (
         <>
             <Navbar />
             <div className="create-listing">
                 <h1>Apne Jagah Ko Prakaashit
                     Kejiye</h1>
-                <form>
+                <form onSubmit={handlePost}>
                     <div className="create-listing_step1">
                         <h2>Setp 1: Apne Jagah ke bare me batao</h2>
                         <hr />
@@ -209,7 +259,10 @@ const CreateListing = () => {
                                 <div className="basic_count">
                                     <IoRemoveCircleOutline
                                         style={{ fontSize: '25px' }}
-                                        onClick={() => { bedroomCount > 1 && setBedroomCount(bedroomCount - 1) }}
+                                        onClick={() => {
+                                            bedroomCount > 1 &&
+                                                setBedroomCount(bedroomCount - 1)
+                                        }}
                                     />
                                     <p>{bedroomCount}</p>
                                     <IoAddCircleOutline
@@ -257,7 +310,7 @@ const CreateListing = () => {
                                 facilities?.map((faci, index) => (
                                     <div className={`facility ${amenities.includes(faci.name) ? "selected" : ""
                                         }`} key={index}
-                                        onClick={()=>{handleSelectAmenities(faci.name)}}>
+                                        onClick={() => { handleSelectAmenities(faci.name) }}>
                                         <div className="facility_icon">{faci.icon}</div>
                                         <p>{faci.name}</p>
                                     </div>
@@ -424,7 +477,7 @@ ref={provided.innerRef}: This assigns the ref attribute of the div to provided.i
                                 placeholder="Title"
                                 name="title"
                                 value={formDescription.title}
-                                onClick={handleChangeDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                             <p>Description</p>
@@ -433,7 +486,7 @@ ref={provided.innerRef}: This assigns the ref attribute of the div to provided.i
                                 placeholder="Description"
                                 name="description"
                                 value={formDescription.description}
-                                onClick={handleChangeDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                             <p>Highlight</p>
@@ -442,7 +495,7 @@ ref={provided.innerRef}: This assigns the ref attribute of the div to provided.i
                                 placeholder="Highlight"
                                 name="highlight"
                                 value={formDescription.highlight}
-                                onClick={handleChangeDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                             <p>Highlight details</p>
@@ -451,7 +504,7 @@ ref={provided.innerRef}: This assigns the ref attribute of the div to provided.i
                                 placeholder="Highlight details"
                                 name="highlightDesc"
                                 value={formDescription.highlightDesc}
-                                onClick={handleChangeDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                             <p>Now, set your PRICE</p>
@@ -462,7 +515,7 @@ ref={provided.innerRef}: This assigns the ref attribute of the div to provided.i
                                 name="price"
                                 className="price"
                                 value={formDescription.price}
-                                onClick={handleChangeDescription}
+                                onChange={handleChangeDescription}
                                 required
                             />
                         </div>

@@ -4,6 +4,7 @@ require('dotenv').config();
 const connectDB = require('./connectDB/connect');
 const cors = require('cors');
 const authRoutes = require('./Routes/authRoutes');
+const PageListingRoutes = require('./Routes/PageListingRoute')
 
 
 
@@ -17,6 +18,7 @@ app.get('/test', (req, res) => {
 });
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/properties', PageListingRoutes);
 
 
 const port = 3000 || process.env.PORT;
