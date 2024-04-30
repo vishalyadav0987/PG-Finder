@@ -17,7 +17,7 @@ const Navbar = () => {
   return (
     <nav style={styles.navbar}>
       <div style={styles.logoContainer}>
-        <FaHome style={styles.logo} /> <span style={styles.logoText}>PG</span><span style={styles.logoText2}>Finder</span>
+        <Link to='/' style={styles.link}> <FaHome style={styles.logo} /> <span style={styles.logoText}>PG</span><span style={styles.logoText2}>Finder</span></Link>
       </div>
       <div style={styles.searchContainer}>
         <input type="text" placeholder="Search..." style={styles.searchInput} />
@@ -88,23 +88,23 @@ const styles = {
   },
   logoContainer: {
     marginRight: 'auto',
-    display:"flex",
-    alignItems:"baseline",
-    gap:"5px"
+    display: "flex",
+    alignItems: "baseline",
+    gap: "5px"
   },
   logo: {
     cursor: 'pointer',
     color: "white",
     fontSize: "3.2rem"
   },
-  logoText:{
+  logoText: {
     fontSize: "2.4rem",
-    color:"#76ABAE",
-    fontWeight:"900"
+    color: "#76ABAE",
+    fontWeight: "900"
   },
-  logoText2:{
+  logoText2: {
     fontSize: "1.8rem",
-    color:"#fff"
+    color: "#fff"
   },
   searchContainer: {
     display: 'flex',
@@ -112,7 +112,7 @@ const styles = {
     backgroundColor: '#555',
     borderRadius: '5px',
     padding: '5px',
-    marginRight:"110px"
+    marginRight: "110px"
   },
   searchInput: {
     border: 'none',
@@ -165,8 +165,8 @@ const styles = {
     textDecoration: 'none',
     padding: '5px',
     margin: '5px 0',
-    fontSize:'1.2rem',
-    marginTop:'10px'
+    fontSize: '1.2rem',
+    marginTop: '10px'
   },
   landlordText1: {
     position: 'absolute',
@@ -175,6 +175,9 @@ const styles = {
   },
   landlordText: {
     color: 'white', textDecoration: 'none',
+  },
+  link:{
+    textDecoration:'none',
   }
 };
 

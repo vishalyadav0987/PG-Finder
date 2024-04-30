@@ -1,10 +1,10 @@
 const mongoose = require("mongoose")
-
+// const UserSchema = require('../modals/UserSchema')
 const PageListingSchema = new mongoose.Schema(
     {
         creator: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'UserSchema',
+            ref: 'User',
         },
         category: {
             type: String,

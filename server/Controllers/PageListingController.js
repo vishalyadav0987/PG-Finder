@@ -1,4 +1,6 @@
 const PageListingSchema = require("../modals/PageListingSchema");
+const UserSchema = require('../modals/UserSchema')
+
 
 const createListing = async (req, res) => {
     try {
@@ -62,22 +64,34 @@ const createListing = async (req, res) => {
 
 // Get getAllListingProperty;
 const getAllListingProperty = async (req, res) => {
-    const { category } = req.query;
+    const qCategory = req.query.category;
     try {
         let listings
-        if (category) {
-            listings = await PageListingSchema.find({ category }).populate("creator"); // it indicate user make the listing
+        if (qCategory) {
+            listings = await PageListingSchema.find({ category: qCategory }).populate("creator"); // it indicate user make the listing
         }
         else {
-            listings = await PageListingSchema.find().populate("creator");;
+            listings = await PageListingSchema.find({}).populate("creator");;
         }
         res.status(200).json({ suceess: true, listings });
     } catch (error) {
-        res.status(500).json({ suceess: false, msg: "error to fetching the data:", error });
+        res.status(500).json({ suceess: false, msg: "error to fetching the data:", error: error.message });
     }
 
+}
+
+// Get single Feed 
+const getSingleProperty = async (req, res) => {
+    const { listingId } = req.params;
+    try {
+        const listingOK = await PageListingSchema.findById(listingId).populate("creator");
+        res.status(200).json({ sucess: true, listingOK });
+    } catch (error) {
+        res.status(404).json({ sucess: false, msg: "Unable to ftech data:", error: error.message });
+    }
 }
 module.exports = {
     createListing,
     getAllListingProperty,
+    getSingleProperty,
 }
