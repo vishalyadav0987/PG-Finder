@@ -34,7 +34,7 @@ const Listing = () => {
     useEffect(() => {
         getFeedListings()
     }, [selectedCategory]);
-    console.log(listings);
+    console.log(listings); 
     return (
         <>
             <div className="category-list">
