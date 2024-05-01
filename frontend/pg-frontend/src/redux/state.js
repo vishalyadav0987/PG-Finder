@@ -21,12 +21,21 @@ export const userSlice = createSlice({
         },
         setTripList: (state, action) => {
             state.user.tripList = action.payload
-        }
+        },
+        setwhishList: (state, action) => {
+            state.user.whishList = action.payload
+        },
+        setPropertyList: (state, action) => {
+            state.user.propertyList = action.payload
+        },
+        setReservationList: (state, action) => {
+            state.user.reservationList = action.payload
+        },
     }
 });
 
 export const { setLogin } = userSlice.actions
 export const { setLogout } = userSlice.actions
-export const { setListings, setTripList } = userSlice.actions
+export const { setListings, setTripList, setwhishList, setPropertyList,setReservationList } = userSlice.actions
 export default userSlice.reducer;
 
