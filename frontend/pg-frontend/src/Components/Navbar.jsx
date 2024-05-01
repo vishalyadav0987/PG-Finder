@@ -2,26 +2,36 @@ import React, { useState } from 'react';
 import { FaSearch, FaUser, FaBars } from 'react-icons/fa'; // Import icons from react-icons library
 import logo from '../assets/logo2.png'; // Import your logo image
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom'; // Import Link from react-router-dom
+import { Link, useNavigate } from 'react-router-dom'; // Import Link from react-router-dom
 import { setLogout } from '../redux/state';
 import { FaHome } from "react-icons/fa";
 
 const Navbar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const user = useSelector(state => state.user); // Assuming user state is stored under 'auth' in Redux store
-
   const handleHamburgerClick = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const dispatch = useDispatch();
+
+  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
   return (
     <nav style={styles.navbar}>
       <div style={styles.logoContainer}>
         <Link to='/' style={styles.link}> <FaHome style={styles.logo} /> <span style={styles.logoText}>PG</span><span style={styles.logoText2}>Finder</span></Link>
       </div>
       <div style={styles.searchContainer}>
-        <input type="text" placeholder="Search..." style={styles.searchInput} />
-        <FaSearch style={styles.searchIcon} />
+        <input
+          type="text"
+          placeholder="Search..."
+          style={styles.searchInput}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <FaSearch style={styles.searchIcon}
+        onClick={()=>navigate(`properties/search/${search}`)}
+        />
       </div>
       <div style={styles.landlordText1}>
         {user ?
@@ -43,13 +53,13 @@ const Navbar = () => {
                 <Link style={styles.dropdownItem} to={`/${user._id}/trips`}>
                   Trip List
                 </Link>
-                <Link to="/wish-list" style={styles.dropdownItem}>
+                <Link style={styles.dropdownItem} to={`/${user._id}/wishList`}>
                   Wish List
                 </Link>
-                <Link to="/property-list" style={styles.dropdownItem}>
+                <Link style={styles.dropdownItem} to={`/${user._id}/properties`}>
                   Property List
                 </Link>
-                <Link to="/reservation-list" style={styles.dropdownItem}>
+                <Link style={styles.dropdownItem} to={`/${user._id}/reservations`}>
                   Reservation List
                 </Link>
                 <Link to="/" style={styles.dropdownItem}>
