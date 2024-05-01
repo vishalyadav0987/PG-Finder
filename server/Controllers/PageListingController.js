@@ -90,8 +90,32 @@ const getSingleProperty = async (req, res) => {
         res.status(404).json({ sucess: false, msg: "Unable to ftech data:", error: error.message });
     }
 }
+
+/** SEARCHING **/
+
+const searchProperty = async (req, res) => {
+    const { search } = req.params;
+    try {
+        let listings = [];
+        if (search === "all") {
+            listings = await PageListingSchema.find().populate("creator");
+        }
+        else {
+            listings = await PageListingSchema.find({
+                $or: [
+                    { category: { $regex: search, $options: "i" } },
+                    { title: { $regex: search, $options: "i" } },
+                ]
+            }).populate("creator")
+        }
+        res.status(200).json(listings);
+    } catch (error) {
+        res.status(404).json({ error: error.message });
+    }
+}
 module.exports = {
     createListing,
     getAllListingProperty,
     getSingleProperty,
+    searchProperty
 }
