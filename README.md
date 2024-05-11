@@ -40,12 +40,11 @@ http://localhost:5137
 * Backend: Node.js, Express.js
 * Database: MongoDB
 * Authentication: JWT (JSON Web Tokens)
-* Deployment: Heroku (Backend), Netlify/Vercel (Frontend)
+* Deployment: Heroku (Backend), Netlify/Vercel (Frontend) pending
 
 # 🚧 Future Enhancements
 
-* Real-time updates using WebSocket technology.
-* Review and rating system for properties.
+* Real-time updates listing property
 * Social login options for authentication.
 
 # 🙏 Acknowledgements
