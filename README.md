@@ -1,6 +1,6 @@
 # 🏠 PG-Finder
 
-## Welcome to PG-Finder - Your Ultimate Solution for Finding Paying Guest Accommodations!
+## Welcome to PG-Finder - Your Ultimate Solution for Finding Paying Guest Accommodations!.
 
 
 # 🚀 Quick Start
