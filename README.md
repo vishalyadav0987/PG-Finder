@@ -1,32 +1,55 @@
 # 🏠 PG-Finder
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Node Version](https://img.shields.io/badge/node.js-14.x%20|%2016.x%20|%2018.x-brightgreen)](https://nodejs.org/en/download/)
+
+
 ## Welcome to PG-Finder - Your Ultimate Solution for Finding Paying Guest Accommodations!.
 
 
-# 🚀 Quick Start
+## Installation
 
-### 1. Clone the repository:
-git clone https://github.com/vishalyadav0987/PG-Finder.git
+1. *Clone the repository*:
+    ``` bash
+    git clone https://github.com/vishalyadav0987/PG-Finder.git
+    cd cd PG-Finder
+    ```
 
-### 2. Navigate to the project directory:
-cd PG-Finder
+2. *Install backend dependencies*:
+    ``` bash
+    cd server
+    npm install
+    ```
 
-### 3. Install dependencies:
-npm install
+3. *Install frontend dependencies*:
+    ```bash
+    cd ../frontend/pg-frontend
+    npm install
+    ```
 
-### 4. Set up environment variables:
-Create a .env file in the root directory.
-Add your MongoDB connection URI as MONGO_URI.
+4. *Start the development servers*:
+    - Backend server:
+      ```bash
+      cd ../server
+      npm start
+      ```
+    - Frontend server:
+      ```bash
+      cd ../frontend/pg-frontend
+      npm run dev
+      ```
 
-### 5. Run the development server:
-npm start
-### 6. Run the development clent:
-npm run dev
 
-### 6. Open your browser and visit:
-http://localhost:5137
 
-# 📋 Features
+## Usage
+
+1. Open your browser and navigate to http://localhost:5173 to access the frontend.
+2. Use Postman or any API client to interact with the backend via http://localhost:3000.
+
+
+
+
+## 📋 Features
 
 * Property Listing: List your properties with ease, including details like location, amenities, and pricing.
 * Property Search: Search for accommodations based on location, price range, and amenities.
@@ -34,23 +57,39 @@ http://localhost:5137
 * Trip List: Keep track of your booked accommodations and upcoming stays.
 * Secure Authentication: User authentication ensures secure access to features.
 
-# 🛠️ Technology Stack
+## 🛠️ Technology Stack
 
 * Frontend: React.js
 * Backend: Node.js, Express.js
 * Database: MongoDB
 * Authentication: JWT (JSON Web Tokens)
-* Deployment: Heroku (Backend), Netlify/Vercel (Frontend) pending
 
-# 🚧 Future Enhancements
+## 🚧 Future Enhancements
 
 * Real-time updates listing property
 * Social login options for authentication.
 
-# 🙏 Acknowledgements
+## Contributing
 
-* Special thanks to all the contributors and open-source projects that made PG-Finder possible.
+- Contributions are welcome! Please open an issue or submit a pull request for any improvements or bug fixes.
 
-# 📧 Contact
 
-* For inquiries or support, please contact vishalyadav0987@gmail.com.
+
+## License
+
+- This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+
+
+## Acknowledgements
+
+- Inspired by various open-source projects and the MERN stack community.
+
+
+
+## Contact
+
+- For any inquiries or feedback, please contact [vishalyadav0987@gmail.com].
+
+
+
